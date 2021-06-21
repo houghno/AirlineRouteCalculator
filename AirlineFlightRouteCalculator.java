@@ -1,4 +1,3 @@
-//hello
 /**
  * A program that uses preferential information from a user to decide what 
  * combination of flights they need to take to get from point A to B.
@@ -59,7 +58,7 @@ public class AirlineFlightRouteCalculator
             airportLocation[i] = Integer.parseInt(airportDatabase[i][1]);
         }
     }
-
+    //hello
     public boolean RangeCalculator(){
         boolean range
         (airportLocation[x][1])

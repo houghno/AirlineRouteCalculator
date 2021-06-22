@@ -8,18 +8,13 @@
 public class Airport
 {
     String airportName;
-    float latitude;
-    float longitude;
+    double latitude;
+    double longitude;
     int connectionI2I;
     int connectionI2D;
     int connectionD2D;
-
     
-    public Airport()
-    {
-        
-    }
-    public Airport(String airportName, float lat, float lon, int i2i, int i2d, int d2d){
+    public Airport(String airportName, double lat, double lon, int i2i, int i2d, int d2d){
         this.airportName=airportName;
         this.latitude=lat;
         this.longitude=lon;

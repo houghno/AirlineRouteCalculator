@@ -9,7 +9,7 @@
 public class AirlineFlightRouteCalculator
 {
     private Airport[] airportDatabase; 
-    
+
     public AirlineFlightRouteCalculator(){
         /*for the airportDatabase array, the first dimension will represent an individual airport and the second will represent the properties of that airport, for example, the name of Wellington
         Airport is stored at airportDatabase[0][0] [Airport][AirportName]  */
@@ -20,31 +20,32 @@ public class AirlineFlightRouteCalculator
         airportDatabase[2][0]="mumbai";
         airportDatabase[3][0]="sydney";
         airportDatabase[4][0]="singapore";
-        */
+         */
         airportDatabase = new Airport[4];
         airportDatabase[0]=new Airport("tokyo",125.5494,319.7798,60,50,40);
         airportDatabase[1]=new Airport("johannesburg",63.8655,208.2264,90,75,70);
     }
     //calculate straight line distance between two airports
-    public int straightLineDistance(int airportDep,int airportArr){
+    public double straightLineDistance(int airportDep,int airportArr){
         double latD=airportDatabase[airportDep].latitude-airportDatabase[airportArr].latitude;
-        return ______;  //lat d and lat y together into one numebr
+        System.out.println( latD);
+        return latD;  //lat d and lat y together into one numebr
     }
-    
+
     /*
     public int locationDigitParser(){
-        
-        for (int i=0;i<10;i++){
-            int airportLocationX=new int[9];
-            int airportLocationY=new int[9];
-            airportLocation[i] = Integer.parseInt(airportDatabase[i][1]);
-        }
+
+    for (int i=0;i<10;i++){
+    int airportLocationX=new int[9];
+    int airportLocationY=new int[9];
+    airportLocation[i] = Integer.parseInt(airportDatabase[i][1]);
     }
-    */
+    }
+     */
     //hello
     /*public boolean RangeCalculator(){
-        boolean range
-        (airportLocation[x][1])
+    boolean range
+    (airportLocation[x][1])
     }*/
     //String[] places = {"abc","def","ghi"};
 

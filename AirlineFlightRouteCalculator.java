@@ -20,29 +20,47 @@ public class AirlineFlightRouteCalculator
         airportDatabase[0]=new Airport("tokyo",125.5494,319.7798,60,50,40);
         airportDatabase[1]=new Airport("johannesburg",63.8655,208.2264,90,75,70);
         airportDatabase[2]=new Airport("auckland",52.9918,354.7850,60,45,30);
+        returnAirports();
         int departureAirport=departure();
         int arrivalAirport=arrival();
         System.out.println(straightLineDistance(departureAirport,arrivalAirport)+" in "+decFormat.format(flightTime(departureAirport,arrivalAirport))+" hours");
     }
+
     public int departure(){
         String selectedAirport = "ERROR, NO AIRPORT SELECTED";
         String departure;
         int airportIndex = 0;
         Scanner departureInput = new Scanner(System.in);
-        System.out.println("Enter a valid departure airport");
-        departure=departureInput.nextLine();
-        for (int i = 0; i < airportDatabase.length; i++){
-            if (airportDatabase[i].airportName.equals(departure)){
-                selectedAirport = airportDatabase[i].airportName;
-                airportIndex=i;
+        boolean departureConfirmation=false;
+        while(departureConfirmation=false){
+            System.out.println("Enter a valid departure airport");
+            departure=departureInput.nextLine();
+            for (int i = 0; i < airportDatabase.length; i++){
+                if (airportDatabase[i].airportName.equals(departure)){
+                    selectedAirport = airportDatabase[i].airportName;
+                    airportIndex=i;
+                    System.out.println("You Selected Departure Airport "+ selectedAirport);
+                    System.out.println("Is this your final choice? Type Yes to Confirm or anything else to cancel.");
+                    if(departureInput.nextLine().equals("Yes")){
+                        departureConfirmation=true;
+                        System.out.println("Selection confirmed.");
+                    }
+                    else{
+                        System.out.print("Selection cancelled, ");  
+                    }
+                }
+                else{
+                    if (airportDatabase[i].airportName.equals(departure)){
+                        System.out.print("Invalid Airport, ");
+                    }
+                }
             }
-            else{
-                //System.out.println(invalidAirport);
-            }
+            
+            
         }
-        System.out.println("You Selected Departure Airport "+ selectedAirport);
         return airportIndex;
     }
+
     public int arrival(){
         String selectedAirport = "ERROR, NO AIRPORT SELECTED";
         String arrival;
@@ -62,8 +80,13 @@ public class AirlineFlightRouteCalculator
         System.out.println("You Selected Arrival Airport "+ selectedAirport);
         return airportIndex;
     }
-    
-    
+
+    public void returnAirports(){
+        System.out.println("Availiable Airports:");
+        for (int i=0;i<=airportDatabase.length-1;i++){
+            System.out.println(airportDatabase[i].airportName);
+        }
+    }
     //calculate straight line distance between two airports
     public double straightLineDistance(int airportDep,int airportArr){
         double latD=airportDatabase[airportDep].latitude-airportDatabase[airportArr].latitude;
@@ -71,12 +94,11 @@ public class AirlineFlightRouteCalculator
         double straightDistance=Math.sqrt(Math.pow(latD,2)+Math.pow(lonD,2));
         return straightDistance;
     }
+
     public double flightTime(int airportDep,int airportArr){
         double time;
         time=straightLineDistance(airportDep,airportArr)/aircraftVelocityFactor;
-        
         return time;
     }
-    
 
 }

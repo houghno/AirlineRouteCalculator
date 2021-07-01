@@ -31,7 +31,7 @@ public class AirlineFlightRouteCalculator
         System.out.println( latD);
         return latD;  //lat d and lat y together into one numebr
     }
-
+    
     /*
     public int locationDigitParser(){
 

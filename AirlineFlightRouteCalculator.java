@@ -1,4 +1,5 @@
 import java.util.Scanner;
+import java.text.*;
 /**
  * A program that uses preferential information from a user to decide what 
  * combination of flights they need to take to get from point A to B.
@@ -9,15 +10,19 @@ import java.util.Scanner;
 
 public class AirlineFlightRouteCalculator
 {
+    private DecimalFormat decFormat = new DecimalFormat("##.##");
+    private double aircraftVelocityFactor = 6.66;
     private Airport[] airportDatabase; 
     String invalidAirport = new String("That is not a valid airport, try again.");
     public AirlineFlightRouteCalculator(){
-        airportDatabase = new Airport[2];
+        System.out.print("\f");
+        airportDatabase = new Airport[3];//has to be equal to the amount of created airports
         airportDatabase[0]=new Airport("tokyo",125.5494,319.7798,60,50,40);
         airportDatabase[1]=new Airport("johannesburg",63.8655,208.2264,90,75,70);
+        airportDatabase[2]=new Airport("auckland",52.9918,354.7850,60,45,30);
         int departureAirport=departure();
         int arrivalAirport=arrival();
-        straightLineDistance(departureAirport,arrivalAirport);
+        System.out.println(straightLineDistance(departureAirport,arrivalAirport)+" in "+decFormat.format(flightTime(departureAirport,arrivalAirport))+" hours");
     }
     public int departure(){
         String selectedAirport = "ERROR, NO AIRPORT SELECTED";
@@ -61,28 +66,17 @@ public class AirlineFlightRouteCalculator
     
     //calculate straight line distance between two airports
     public double straightLineDistance(int airportDep,int airportArr){
-        
         double latD=airportDatabase[airportDep].latitude-airportDatabase[airportArr].latitude;
         double lonD=airportDatabase[airportDep].longitude-airportDatabase[airportArr].longitude;
         double straightDistance=Math.sqrt(Math.pow(latD,2)+Math.pow(lonD,2));
         return straightDistance;
     }
+    public double flightTime(int airportDep,int airportArr){
+        double time;
+        time=straightLineDistance(airportDep,airportArr)/aircraftVelocityFactor;
+        
+        return time;
+    }
     
-    /*
-    public int locationDigitParser(){
-
-    for (int i=0;i<10;i++){
-    int airportLocationX=new int[9];
-    int airportLocationY=new int[9];
-    airportLocation[i] = Integer.parseInt(airportDatabase[i][1]);
-    }
-    }
-     */
-    //hello
-    /*public boolean RangeCalculator(){
-    boolean range
-    (airportLocation[x][1])
-    }*/
-    //String[] places = {"abc","def","ghi"};
 
 }

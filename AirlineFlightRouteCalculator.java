@@ -1,3 +1,4 @@
+import java.util.Scanner;
 /**
  * A program that uses preferential information from a user to decide what 
  * combination of flights they need to take to get from point A to B.
@@ -9,7 +10,45 @@
 public class AirlineFlightRouteCalculator
 {
     private Airport[] airportDatabase; 
-
+    String invalidAirport = new String("That is not a valid airport, try again.");
+    public int departure(){
+        String selectedAirport = "ERROR, NO AIRPORT SELECTED";
+        String departure;
+        int i;
+        Scanner departureInput = new Scanner(System.in);
+        System.out.println("Enter a valid departure airport");
+        departure=departureInput.nextLine();
+        for (i = 0; i >= airportDatabase.length; i++){
+            if (airportDatabase[i].airportName.equals(departure)) {
+                selectedAirport = airportDatabase[i].airportName;
+            }
+            else{
+                System.out.println(invalidAirport);
+            }
+        }
+        System.out.println("You Selected Departure Airport "+ selectedAirport);
+        return i;
+    }
+    public int arrival(){
+        String selectedAirport = "ERROR, NO AIRPORT SELECTED";
+        String arrival;
+        int i;
+        Scanner arrivalInput = new Scanner(System.in);
+        System.out.println("Enter a valid arrival airport");
+        arrival=arrivalInput.nextLine();
+        for (i = 0; i >= airportDatabase.length; i++){
+            if (airportDatabase[i].airportName.equals(arrival)) {
+                selectedAirport = airportDatabase[i].airportName;
+                
+            } 
+            else{
+                System.out.println(invalidAirport);
+            }
+        }
+        System.out.println("You Selected Arrival Airport "+ selectedAirport);
+        return i;
+    }
+    
     public AirlineFlightRouteCalculator(){
         /*for the airportDatabase array, the first dimension will represent an individual airport and the second will represent the properties of that airport, for example, the name of Wellington
         Airport is stored at airportDatabase[0][0] [Airport][AirportName]  */
@@ -28,7 +67,7 @@ public class AirlineFlightRouteCalculator
     //calculate straight line distance between two airports
     public double straightLineDistance(int airportDep,int airportArr){
         double latD=airportDatabase[airportDep].latitude-airportDatabase[airportArr].latitude;
-        System.out.println( latD);
+        System.out.println(latD);
         return latD;  //lat d and lat y together into one numebr
     }
     

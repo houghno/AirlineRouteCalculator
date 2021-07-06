@@ -5,7 +5,7 @@ import java.text.*;
  * combination of flights they need to take to get from point A to B.
  *
  * @author Noah Houghton
- * @version 1.0
+ * 
  */
 
 public class AirlineFlightRouteCalculator
@@ -14,6 +14,7 @@ public class AirlineFlightRouteCalculator
     private double aircraftVelocityFactor = 6.66;
     private Airport[] airportDatabase; 
     String invalidAirport = new String("That is not a valid airport, try again.");
+    private String finalChoice="Is this your final choice? Type Yes to Confirm or anything else to cancel.";
     public AirlineFlightRouteCalculator(){
         System.out.print("\f");
         airportDatabase = new Airport[3];//has to be equal to the amount of created airports
@@ -21,28 +22,36 @@ public class AirlineFlightRouteCalculator
         airportDatabase[1]=new Airport("johannesburg",63.8655,208.2264,90,75,70);
         airportDatabase[2]=new Airport("auckland",52.9918,354.7850,60,45,30);
         returnAirports();
-        int departureAirport=departure();
-        int arrivalAirport=arrival();
+        System.out.println("Enter a valid departure airport");
+        int departureAirport=pickAirport();
+        System.out.println("Enter a valid arrival airport");
+        int arrivalAirport=pickAirport();
         System.out.println(straightLineDistance(departureAirport,arrivalAirport)+" in "+decFormat.format(flightTime(departureAirport,arrivalAirport))+" hours");
     }
 
-    public int departure(){
+    public int pickAirport(){
         String selectedAirport = "ERROR, NO AIRPORT SELECTED";
-        String departure;
+        String pickedAirport;
         int airportIndex = 0;
-        Scanner departureInput = new Scanner(System.in);
-        boolean departureConfirmation=false;
-        while(departureConfirmation=false){
-            System.out.println("Enter a valid departure airport");
-            departure=departureInput.nextLine();
-            for (int i = 0; i < airportDatabase.length; i++){
-                if (airportDatabase[i].airportName.equals(departure)){
+        Scanner airportInput = new Scanner(System.in);
+        boolean airportConfirmation=false;
+        
+        pickedAirport=airportInput.nextLine();
+        
+        while(airportConfirmation==false){
+            
+            for (int i = 0;i<airportDatabase.length;i++){    
+                
+                if (airportDatabase[i].airportName.equals(pickedAirport)){
+
                     selectedAirport = airportDatabase[i].airportName;
                     airportIndex=i;
-                    System.out.println("You Selected Departure Airport "+ selectedAirport);
+                    System.out.println("You Selected Airport "+ selectedAirport);
                     System.out.println("Is this your final choice? Type Yes to Confirm or anything else to cancel.");
-                    if(departureInput.nextLine().equals("Yes")){
-                        departureConfirmation=true;
+                    
+                    
+                    if(airportInput.nextLine().equals("yes")){
+                        airportConfirmation=true;
                         System.out.println("Selection confirmed.");
                     }
                     else{
@@ -50,36 +59,18 @@ public class AirlineFlightRouteCalculator
                     }
                 }
                 else{
-                    if (airportDatabase[i].airportName.equals(departure)){
-                        System.out.print("Invalid Airport, ");
-                    }
+                        if (airportDatabase[i].airportName.equals(pickedAirport)){
+                            System.out.print("Invalid Airport, ");
+                        }
                 }
+
             }
-            
-            
+
         }
         return airportIndex;
     }
 
-    public int arrival(){
-        String selectedAirport = "ERROR, NO AIRPORT SELECTED";
-        String arrival;
-        int airportIndex = 0;
-        Scanner arrivalInput = new Scanner(System.in);
-        System.out.println("Enter a valid arrival airport");
-        arrival=arrivalInput.nextLine();
-        for (int i=0;i<airportDatabase.length;i++){
-            if (airportDatabase[i].airportName.equals(arrival)){
-                selectedAirport = airportDatabase[i].airportName;
-                airportIndex = i;
-            } 
-            else{
-                //System.out.println(invalidAirport);
-            }
-        }
-        System.out.println("You Selected Arrival Airport "+ selectedAirport);
-        return airportIndex;
-    }
+    
 
     public void returnAirports(){
         System.out.println("Availiable Airports:");

@@ -3,7 +3,7 @@
  * Class containing information about airports and 
  *
  * @author Noah Houghton
- * @version 10/06/2021
+ * 
  */
 public class Airport
 {

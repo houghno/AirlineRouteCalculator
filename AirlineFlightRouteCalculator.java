@@ -31,14 +31,14 @@ public class AirlineFlightRouteCalculator
     }
 
     public int PickAirport(boolean askForDeparture){
-
         String pickedAirport;
-        int airportIndex=-1;/*counter that changes when an airport is found in the database that has the same name as the user input airport. If i is -1 once the for loop within this class is
-        run, it is known that the for loop did not find a valid airport due to the for loop not being able to make i=-1 as it runs from i=0 then i++, each run of the for loop. Therefore it is 
-        clear to assume that the airport is invalid*/
+        int airportIndex=-1;
         Scanner airportInput = new Scanner(System.in);
         boolean airportConfirmation=false;
         while(airportConfirmation==false){
+            airportIndex=-1;/*counter that changes when an airport is found in the database that has the same name as the user input airport. If i is -1 once the for loop within this class is
+            run, it is known that the for loop did not find a valid airport due to the for loop not being able to make i=-1 as it runs from i=0 then i++, each run of the for loop. Therefore it is 
+            clear to assume that the airport is invalid*/
             if(askForDeparture){
                 System.out.println("Enter a valid departure airport");
             }else{
@@ -63,7 +63,8 @@ public class AirlineFlightRouteCalculator
                     }
                     else{
                         if(airportDatabase[previousAirportSelection].airportName.equals(pickedAirport)){
-                            System.out.print("Selected arrival airport was the same as selected departure airport, ");
+                            System.out.print("The selected arrival airport " + pickedAirport + " was the same as selected departure airport, ");
+                            airportIndex=0;
                         }//checking to see if the selected arrival airport is the same as the selected departure airport
                         else{
                             selectedAirport = airportDatabase[i].airportName;
@@ -83,7 +84,7 @@ public class AirlineFlightRouteCalculator
             }//for
             if (airportIndex==-1){
                 System.out.print("Invalid Airport, ");
-            }//if airporIndex=-1 it is known that the program 
+            }//if airporIndex=-1 it is known that the program did not find a valid airport to change the value of airportIndex to be >-1
         }
         return airportIndex;
     }//runs for departure and arrival airports

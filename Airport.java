@@ -8,6 +8,7 @@
 public class Airport
 {
     String airportName;
+    private double aircraftVelocityFactor = 6.66; //should be capitalised but kept lower case due to possibility of changing variable later
     double latitude;
     double longitude;
     int connectionI2I;
@@ -24,5 +25,15 @@ public class Airport
         
     }
   
-    
+    public double straightLineDistance(Airport destination){
+        double latD=this.latitude-destination.latitude;
+        double lonD=this.longitude-destination.longitude;
+        double straightDistance=Math.sqrt(Math.pow(latD,2)+Math.pow(lonD,2));
+        return straightDistance;
+    }//calculates and returns straight line distance between departure and arrival airports
+    public double flightTime(Airport destination){
+        double time;
+        time=this.straightLineDistance(destination)/aircraftVelocityFactor;
+        return time;
+    }//calculates and returns the time that a flight takes to complete
 }

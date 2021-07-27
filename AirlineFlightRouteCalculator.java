@@ -8,7 +8,6 @@ import java.text.*;
  */
 public class AirlineFlightRouteCalculator
 {
-
     private DecimalFormat decFormat = new DecimalFormat("##.##");
     private double aircraftVelocityFactor = 6.66;
     private Airport[] airportDatabase; 
@@ -25,9 +24,10 @@ public class AirlineFlightRouteCalculator
         returnAirports();
         int departureAirport=PickAirport(true);
         previousAirportSelection=departureAirport;
-
         int arrivalAirport=PickAirport(false);
-        System.out.println(straightLineDistance(departureAirport,arrivalAirport)+" in "+decFormat.format(flightTime(departureAirport,arrivalAirport))+" hours");
+        Airport from=airportDatabase[departureAirport];
+        Airport to=airportDatabase[arrivalAirport];
+        System.out.println(from.straightLineDistance(to)+" in "+decFormat.format(from.flightTime(to))+" hours");
     }
 
     public int PickAirport(boolean askForDeparture){
@@ -43,7 +43,6 @@ public class AirlineFlightRouteCalculator
                 System.out.println("Enter a valid departure airport");
             }else{
                 System.out.println("Enter a valid arrival airport");
-
             }
             pickedAirport=airportInput.nextLine();
             for (int i = 0;i<airportDatabase.length;i++){//runs for the length of the airportDatabase array
@@ -94,15 +93,5 @@ public class AirlineFlightRouteCalculator
             System.out.println(airportDatabase[i].airportName);
         }
     }//returns all airport names within the airportDatabase array
-    public double straightLineDistance(int airportDep,int airportArr){
-        double latD=airportDatabase[airportDep].latitude-airportDatabase[airportArr].latitude;
-        double lonD=airportDatabase[airportDep].longitude-airportDatabase[airportArr].longitude;
-        double straightDistance=Math.sqrt(Math.pow(latD,2)+Math.pow(lonD,2));
-        return straightDistance;
-    }//calculates and returns straight line distance between departure and arrival airports
-    public double flightTime(int airportDep,int airportArr){
-        double time;
-        time=straightLineDistance(airportDep,airportArr)/aircraftVelocityFactor;
-        return time;
-    }//calculates and returns the time that a flight takes to complete
+    
 }

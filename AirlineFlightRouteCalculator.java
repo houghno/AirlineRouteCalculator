@@ -1,4 +1,4 @@
-import java.util.Scanner;
+import java.util.Scanner;//importing scanner utilisation
 import java.io.File;
 import java.io.IOException;
 import java.text.*;//importing for decFormat
@@ -12,53 +12,15 @@ public class AirlineFlightRouteCalculator
 {
     private DecimalFormat decFormat = new DecimalFormat("##.##");
     private double aircraftVelocityFactor = 6.66;
-    private Airport[] airportDatabase; 
+    private Airport[] airportDatabase = new Airport[100]; 
     private String invalidAirport = new String("That is not a valid airport, try again.");
     private String finalChoice="Is this your final choice? Type Yes to Confirm or anything else to cancel.";
     private String selectedAirport = "ERROR, NO AIRPORT SELECTED";
     private int previousAirportSelection;
+    private int airportNumber = 0;//counter to allocate an airport to an array index
     public AirlineFlightRouteCalculator(){
         System.out.print("\f");
-        int i = 0;
-        airportDatabase = new Airport[100];
-        System.out.println(airportDatabase.length);
-        /*airportDatabase[0]= new Airport[];
-        airportDatabase[0].latitude=100.0;*/
-        File airports=new File("airportdatabase.txt");
-        try {
-            Scanner readAirportsFile = new Scanner(airports);
-            while (readAirportsFile.hasNextLine()){
-                String airportsFileLine=readAirportsFile.nextLine();
-                String splitAtComma=",";
-                String parts[]=airportsFileLine.split(splitAtComma);
-                for (int a=0;a<parts.length; a++){
-                    System.out.println(parts[a]);
-                }
-                double partsDoubleOne;
-                double partsDoubleTwo;
-                for (int c=0;c<parts.length;c++){
-                    //airportDatabase[c].airportName=parts[0];
-                    partsDoubleOne=Double.parseDouble(parts[1]);
-                    partsDoubleTwo=Double.parseDouble(parts[2]);
-                    airportDatabase[c]= new Airport(parts[0],partsDoubleOne,partsDoubleTwo);
-                    /*airportDatabase[c].latitude=partsDoubleOne;
-                    airportDatabase[c].longitude=partsDoubleTwo;
-                    System.out.println(airportDatabase[c].latitude);
-                    System.out.println(airportDatabase[c].longitude);*/
-                    
-                }
-                //airportDatabase[i]=new Airport(airportsFileLine,1,1);
-                i++;
-            }
-            
-        }   
-        catch(IOException e){
-            e.printStackTrace();
-        }
-        /*airportDatabase = new Airport[3];//has to be equal to the amount of created airports
-        airportDatabase[0]=new Airport("tokyo",125.5494,319.7798,60,50,40);
-        airportDatabase[1]=new Airport("johannesburg",63.8655,208.2264,90,75,70);
-        airportDatabase[2]=new Airport("auckland",52.9918,354.7850,60,45,30);*/
+        fileReader();
         returnAirports();
         int departureAirport=PickAirport(true);
         previousAirportSelection=departureAirport;
@@ -66,6 +28,30 @@ public class AirlineFlightRouteCalculator
         Airport from=airportDatabase[departureAirport];
         Airport to=airportDatabase[arrivalAirport];
         System.out.println(from.straightLineDistance(to)+" in "+decFormat.format(from.flightTime(to))+" hours");
+    }
+
+    public void fileReader(){
+
+        File airports=new File("airportdatabase.txt");
+        try {
+            Scanner readAirportsFile = new Scanner(airports);
+            while (readAirportsFile.hasNextLine()){
+                double partsDoubleOne;
+                double partsDoubleTwo;
+                String airportsFileLine=readAirportsFile.nextLine();
+                String splitAtComma=",";
+                String parts[]=airportsFileLine.split(splitAtComma);
+                partsDoubleOne=Double.parseDouble(parts[1]);
+                partsDoubleTwo=Double.parseDouble(parts[2]);
+                airportDatabase[airportNumber]= new Airport(parts[0],partsDoubleOne,partsDoubleTwo);
+                airportNumber++;
+            }
+
+        }   
+        catch(IOException e){
+            e.printStackTrace();
+        }
+
     }
 
     public int PickAirport(boolean askForDeparture){
@@ -83,7 +69,7 @@ public class AirlineFlightRouteCalculator
                 System.out.println("Enter a valid arrival airport from the list above");
             }
             pickedAirport=airportInput.nextLine();
-            for (int i = 0;i<airportDatabase.length;i++){//runs for the length of the airportDatabase array
+            for (int i = 0;i<airportNumber;i++){//runs for the length of the airportDatabase array
                 if (airportDatabase[i].airportName.equals(pickedAirport)){
                     if(askForDeparture){
                         selectedAirport = airportDatabase[i].airportName;
@@ -127,9 +113,9 @@ public class AirlineFlightRouteCalculator
     }//runs for departure and arrival airports
     public void returnAirports(){
         System.out.println("Availiable Airports:");
-        for (int i=0;i<=airportDatabase.length-1;i++){
-            System.out.println(airportDatabase[i].airportName);
+        for (int b=0;b<airportNumber;b++){
+            System.out.println(airportDatabase[b].airportName);
         }
     }//returns all airport names within the airportDatabase array
-    
+
 }

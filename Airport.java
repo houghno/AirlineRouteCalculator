@@ -11,20 +11,20 @@ public class Airport
     private double aircraftVelocityFactor = 6.66; //should be capitalised but kept lower case due to possibility of changing variable later
     double latitude;
     double longitude;
-    int connectionI2I;
+    /*int connectionI2I;
     int connectionI2D;
-    int connectionD2D;
-    
-    public Airport(String airportName, double lat, double lon, int i2i, int i2d, int d2d){
+    int connectionD2D;*/
+
+    public Airport(String airportName, double lat, double lon/*, int i2i, int i2d, int d2d*/){
         this.airportName=airportName;
         this.latitude=lat;
         this.longitude=lon;
-        this.connectionI2I=i2i;
+        /*this.connectionI2I=i2i;
         this.connectionI2D=i2d;
-        this.connectionD2D=d2d;
-        
+        this.connectionD2D=d2d;*/
+
     }
-  
+
     public double straightLineDistance(Airport destination){
         double latD=this.latitude-destination.latitude;
         double lonD=this.longitude-destination.longitude;

@@ -64,9 +64,9 @@ public class AirlineFlightRouteCalculator
             run, it is known that the for loop did not find a valid airport due to the for loop not being able to make i=-1 as it runs from i=0 then i++, each run of the for loop. Therefore it is 
             clear to assume that the airport is invalid*/
             if(askForDeparture){
-                System.out.println("Enter a valid departure airport from the list above");
+                System.out.println("Enter a valid departure airport from the list of Availiable Airports");
             }else{
-                System.out.println("Enter a valid arrival airport from the list above");
+                System.out.println("Enter a valid arrival airport from the list of Availiable Airports");
             }
             pickedAirport=airportInput.nextLine();
             for (int i = 0;i<airportNumber;i++){//runs for the length of the airportDatabase array
@@ -74,11 +74,11 @@ public class AirlineFlightRouteCalculator
                     if(askForDeparture){
                         selectedAirport = airportDatabase[i].airportName;
                         airportIndex=i;
-                        System.out.println("You Selected Airport "+ selectedAirport);
-                        System.out.println("Is this your final choice? Type yes to Confirm or anything else to cancel.");
-                        if(airportInput.nextLine().equals("yes")){
+                        System.out.println("You Selected Airport "+ selectedAirport+"");
+                        System.out.println("Is this your final choice? Type yes to Confirm or anything else to cancel. ");
+                        if(airportInput.nextLine().toLowerCase().equals("yes")){
                             airportConfirmation=true;
-                            System.out.println("Selection confirmed.");
+                            System.out.println("Selection confirmed. ");
                         }
                         else{
                             System.out.print("Selection cancelled, ");  
@@ -93,7 +93,7 @@ public class AirlineFlightRouteCalculator
                             selectedAirport = airportDatabase[i].airportName;
                             airportIndex=i;
                             System.out.println("You Selected Airport "+ selectedAirport);
-                            System.out.println("Is this your final choice? Type yes to Confirm or anything else to cancel.");
+                            System.out.println("Is this your final choice? Type yes to Confirm or anything else to cancel. ");
                             if(airportInput.nextLine().equals("yes")){
                                 airportConfirmation=true;
                                 System.out.println("Selection confirmed.");

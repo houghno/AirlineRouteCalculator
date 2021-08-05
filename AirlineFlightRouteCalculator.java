@@ -10,20 +10,20 @@ import java.text.*;//importing for decFormat
  */
 public class AirlineFlightRouteCalculator
 {
-    private DecimalFormat decFormat = new DecimalFormat("##.##");
-    private Airport[] airportDatabase = new Airport[100]; 
-    private String invalidAirport = new String("That is not a valid airport, try again. ");
-    private String finalChoice="Is this your final choice? Type Yes to Confirm or anything else to cancel. ";
-    private String selectedAirport = "ERROR, NO AIRPORT SELECTED";
-    private int previousAirportSelection;
+    private DecimalFormat decFormat = new DecimalFormat("##.##");//for changing hours and minutes values to 2 decimal places
+    private Airport[] airportDatabase = new Airport[100];//initialising the airportDatabase variable 
+    //private String invalidAirport = new String("That is not a valid airport, try again. ");//invalid airport message
+    private String finalChoice="Is this your final choice? Type Yes to Confirm or anything else to cancel. ";//prompt to the user for them to confirm their selected airport
+    private String selectedAirport = "NO AIRPORT SELECTED";//error message in case no airport was somehow entered
+    private int previousAirportSelection;//to store the departure airport and check that the input arrival airport was not the same as this
     private int airportNumber = 0;//counter to allocate an airport to an array index
     public AirlineFlightRouteCalculator(){
-        System.out.print("\f");
-        fileReader();
-        returnAirports();
-        int departureAirport=PickAirport(true);
+        System.out.print("\f");//clears dialog box
+        fileReader();//reads data out from the file of airports and sorts it into the airportDatabase variable
+        returnAirports();//returns the names of all Airport variables
+        int departureAirport=PickAirport(true);//runs the PickAirport method so that it runs to cater for a departure airport
         previousAirportSelection=departureAirport;
-        int arrivalAirport=PickAirport(false);
+        int arrivalAirport=PickAirport(false);//runs the PickAirport method so that it runs to cater for an arrival airport
         Airport from=airportDatabase[departureAirport];
         Airport to=airportDatabase[arrivalAirport];
         System.out.println("The distance of your selected route was calculated to be "+ from.straightLineDistance(to,true) + " units");

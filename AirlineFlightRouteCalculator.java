@@ -11,7 +11,6 @@ import java.text.*;//importing for decFormat
 public class AirlineFlightRouteCalculator
 {
     private DecimalFormat decFormat = new DecimalFormat("##.##");
-    private double aircraftVelocityFactor = 6.66;
     private Airport[] airportDatabase = new Airport[100]; 
     private String invalidAirport = new String("That is not a valid airport, try again.");
     private String finalChoice="Is this your final choice? Type Yes to Confirm or anything else to cancel.";
@@ -27,7 +26,8 @@ public class AirlineFlightRouteCalculator
         int arrivalAirport=PickAirport(false);
         Airport from=airportDatabase[departureAirport];
         Airport to=airportDatabase[arrivalAirport];
-        System.out.println(from.straightLineDistance(to)+" in "+decFormat.format(from.flightTime(to))+" hours");
+        System.out.println("The distance of your selected route was calculated to be "+ from.straightLineDistance(to,true) + " units");
+        System.out.println("The estimated flight time of that route was calculated to be "+decFormat.format(from.flightTimeInHours(to))+" hours which is equivalent to " + decFormat.format(from.flightTimeInMinutes(to)) +" minutes");
     }
 
     public void fileReader(){

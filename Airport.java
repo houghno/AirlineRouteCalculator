@@ -20,46 +20,51 @@ public class Airport
     }
 
     public double straightLineDistance(Airport destination,boolean statementShouldRun){
-        if(statementShouldRun=true){
+        double tempDepLongitude=0;
+        double tempArrLongitude=0;
+        double latD=0;
+        double lonD=0;
+        if(true){
             if(this.longitude<0){
-                System.out.println("Departure Longitude was less than 0");
+                //System.out.println("**Departure Longitude was less than 0");
                 if(destination.longitude>0){
-                    System.out.println("Arrival Longitude was greater than 0");
-                    System.out.println(this.longitude);
-                    System.out.println(destination.longitude);
-                    this.longitude=this.longitude+180;
-                    destination.longitude=destination.longitude-180;
-                    System.out.println(this.longitude);
-                    System.out.println(destination.longitude);
+                    //System.out.println("Arrival Longitude was greater than 0");
+                    //System.out.println(this.longitude);
+                    //System.out.println(destination.longitude);
+                    tempDepLongitude=this.longitude+180;
+                    tempArrLongitude=destination.longitude-180;
+                    //System.out.println(tempDepLongitude);
+                    //System.out.println(tempArrLongitude);
                 }
             }else{
-                if(this.longitude>0){
-                    System.out.println("Departure Longitude was greater than 0");
-                    if(destination.longitude<0){
-                        System.out.println("Arrival Longitude was less than 0");
-                        System.out.println(this.longitude);
-                        System.out.println(destination.longitude);
-                        this.longitude=this.longitude-180;
-                        destination.longitude=destination.longitude+180;
-                        System.out.println(this.longitude);
-                        System.out.println(destination.longitude);
-                    }
+                //System.out.println("Departure Longitude was greater than 0");
+                if(destination.longitude<0){
+                    //System.out.println("Arrival Longitude was less than 0");
+                    //System.out.println(this.longitude);
+                    //System.out.println(destination.longitude);
+                    tempDepLongitude=this.longitude-180;
+                    tempArrLongitude=destination.longitude+180;
+                    //System.out.println(this.longitude);
+                    //System.out.println(destination.longitude);
                 }
             }
+            latD=this.latitude-destination.latitude;
+            lonD=tempDepLongitude-tempArrLongitude;
         }
-        
-        double latD=this.latitude-destination.latitude;
-        double lonD=this.longitude-destination.longitude;
-        
+        else{
+
+            latD=this.latitude-destination.latitude;
+            lonD=this.longitude-destination.longitude;
+        }
         double straightDistance=Math.sqrt(Math.pow(latD,2)+Math.pow(lonD,2));
-        double timeInHours;
+        /*double timeInHours;
         double timeInMinutes;
         timeInHours=straightDistance/aircraftVelocityFactor;
-        timeInMinutes=60*(straightDistance/aircraftVelocityFactor);
-        
+        timeInMinutes=60*(straightDistance/aircraftVelocityFactor);*/
+
         return straightDistance;
     }//calculates and returns straight line distance between departure and arrival airports
-    
+
     public double flightTimeInHours(Airport destination){
         double timeInHours;
         timeInHours=this.straightLineDistance(destination,false)/aircraftVelocityFactor;
@@ -70,5 +75,5 @@ public class Airport
         timeInMinutes=60*(this.straightLineDistance(destination,false)/aircraftVelocityFactor);
         return timeInMinutes;
     }//calculates and returns the time in minutes that a flight takes to complete
-    
+
 }

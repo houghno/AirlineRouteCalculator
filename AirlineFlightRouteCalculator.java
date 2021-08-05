@@ -12,8 +12,8 @@ public class AirlineFlightRouteCalculator
 {
     private DecimalFormat decFormat = new DecimalFormat("##.##");
     private Airport[] airportDatabase = new Airport[100]; 
-    private String invalidAirport = new String("That is not a valid airport, try again.");
-    private String finalChoice="Is this your final choice? Type Yes to Confirm or anything else to cancel.";
+    private String invalidAirport = new String("That is not a valid airport, try again. ");
+    private String finalChoice="Is this your final choice? Type Yes to Confirm or anything else to cancel. ";
     private String selectedAirport = "ERROR, NO AIRPORT SELECTED";
     private int previousAirportSelection;
     private int airportNumber = 0;//counter to allocate an airport to an array index
@@ -64,18 +64,18 @@ public class AirlineFlightRouteCalculator
             run, it is known that the for loop did not find a valid airport due to the for loop not being able to make i=-1 as it runs from i=0 then i++, each run of the for loop. Therefore it is 
             clear to assume that the airport is invalid*/
             if(askForDeparture){
-                System.out.println("Enter a valid departure airport from the list of Availiable Airports");
+                System.out.println("Enter a valid departure airport from the list of availiable airports");
             }else{
-                System.out.println("Enter a valid arrival airport from the list of Availiable Airports");
+                System.out.println("Enter a valid arrival airport from the list of availiable airports");
             }
             pickedAirport=airportInput.nextLine();
             for (int i = 0;i<airportNumber;i++){//runs for the length of the airportDatabase array
-                if (airportDatabase[i].airportName.equals(pickedAirport)){
+                if (airportDatabase[i].airportName.equals(pickedAirport.toLowerCase())){
                     if(askForDeparture){
                         selectedAirport = airportDatabase[i].airportName;
                         airportIndex=i;
-                        System.out.println("You Selected Airport "+ selectedAirport+"");
-                        System.out.println("Is this your final choice? Type yes to Confirm or anything else to cancel. ");
+                        System.out.println("You selected the airport "+ selectedAirport+"");
+                        System.out.println("Is this your final choice? Type yes to confirm or anything else to cancel. ");
                         if(airportInput.nextLine().toLowerCase().equals("yes")){
                             airportConfirmation=true;
                             System.out.println("Selection confirmed. ");
@@ -86,15 +86,15 @@ public class AirlineFlightRouteCalculator
                     }
                     else{
                         if(airportDatabase[previousAirportSelection].airportName.equals(pickedAirport)){
-                            System.out.print("The selected arrival airport " + pickedAirport + " was the same as selected departure airport, ");
+                            System.out.print("The selected arrival airport " + pickedAirport.toUpperCase() + " was the same as selected departure airport, ");
                             airportIndex=0;
                         }//checking to see if the selected arrival airport is the same as the selected departure airport
                         else{
                             selectedAirport = airportDatabase[i].airportName;
                             airportIndex=i;
-                            System.out.println("You Selected Airport "+ selectedAirport);
-                            System.out.println("Is this your final choice? Type yes to Confirm or anything else to cancel. ");
-                            if(airportInput.nextLine().equals("yes")){
+                            System.out.println("You selected the airport "+ selectedAirport.toUpperCase());
+                            System.out.println("Is this your final choice? Type yes to confirm or anything else to cancel. ");
+                            if(airportInput.nextLine().toLowerCase().equals("yes")){
                                 airportConfirmation=true;
                                 System.out.println("Selection confirmed.");
                             }
@@ -106,7 +106,7 @@ public class AirlineFlightRouteCalculator
                 }
             }//for
             if (airportIndex==-1){
-                System.out.print("Invalid Airport, check that your spelling is correct");
+                System.out.print("That was an invalid airport, check that your spelling is correct. ");
             }//if airporIndex=-1 it is known that the program did not find a valid airport to change the value of airportIndex to be >-1
         }
         return airportIndex;
@@ -114,7 +114,7 @@ public class AirlineFlightRouteCalculator
     public void returnAirports(){
         System.out.println("Availiable Airports:");
         for (int b=0;b<airportNumber;b++){
-            System.out.println(airportDatabase[b].airportName);
+            System.out.println(airportDatabase[b].airportName.toUpperCase());
         }
     }//returns all airport names within the airportDatabase array
 

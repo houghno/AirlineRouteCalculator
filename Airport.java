@@ -1,7 +1,7 @@
 import java.util.Arrays;
 /**
  * Class containing information about airports and methods to calculate route distance, flight time and a constructor for Airport type
- *
+ * 
  * @author Noah Houghton
  * 
  */

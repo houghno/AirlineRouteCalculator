@@ -1,5 +1,6 @@
-tokyo,35.5494,139.7798
+tokyo haneda,35.5494,139.7798
 johannesburg,-26.1367,28.2264
 auckland,-37.0082,174.7850
-london,51.4700,-0.4543
+london heathrow,51.4700,-0.4543
 anchorage,61.1759,-149.9901
+los angeles international,33.9416,-118.4085
